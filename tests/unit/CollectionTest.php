@@ -28,5 +28,32 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 		]);
 
 		$this->assertCount(3, $collection->get());
+		$this->assertEquals($collection->get()[0], 'one');
+		$this->assertEquals($collection->get()[1], 'two');
+	}
+
+	/** @test */
+	public function collection_is_instance_of_iterator_aggregate()
+	{
+		$collection = new \App\Support\Collection();
+
+		$this->assertInstanceOf(IteratorAggregate::class, $collection);
+	}
+
+	/** @test */
+	public function collection_can_be_iterated()
+	{
+		$collection = new \App\Support\Collection([
+			'one', 'two', 'three'
+		]);
+
+		$items = [];
+
+		foreach ($collection as $item) {
+			$items[] = $item;
+		}
+
+		$this->assertCount(3, $items);
+
 	}
 }

@@ -2,7 +2,10 @@
 
 namespace App\Support;
 
-class Collection
+use IteratorAggregate;
+use ArrayInterator;
+
+class Collection implements IteratorAggregate
 {
 	protected $items = [];
 
@@ -33,5 +36,14 @@ class Collection
 	{
 		return count($this->items);
 	}
-}
 
+	/**
+	 * implementar a interface InteratorAggregate
+	 *
+	 * @return array
+	 */
+	public function getIterator()
+	{
+		return new ArrayInterator($this->items);
+	}
+}
